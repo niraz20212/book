@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: bookmanagementsystem
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book_mis
+    username: keycloak
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
