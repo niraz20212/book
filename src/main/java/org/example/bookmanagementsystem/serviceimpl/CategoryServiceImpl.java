@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
             categoryToUpdate.setName(category.getName());
             categoryToUpdate.setDescription(category.getDescription());
             return categoryRepository.save(categoryToUpdate);
-        }else {
+        } else {
             throw new RuntimeException("Category not found");
         }
 
@@ -38,11 +38,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(int id) {
-   categoryRepository.deleteById(id);
+        categoryRepository.deleteById(id);
     }
 
     @Override
     public List<Category> getAllCategories() {
-        return  categoryRepository.findAll();
+        return categoryRepository.findAll();
     }
 }

@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "book_Tbl")
+@Table(name = "book_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +31,6 @@ public class Book {
     private Category category;
     @ManyToMany(mappedBy = "book")
     private Set<Author> authors = new HashSet<>();
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @OneToMany(mappedBy = "book")
+    private List<BookTransaction> bookTransactions;
 }

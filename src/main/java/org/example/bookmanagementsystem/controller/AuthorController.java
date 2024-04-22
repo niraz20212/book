@@ -14,21 +14,25 @@ public class AuthorController {
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
+
     @PostMapping("/save")
-    public Author save(@RequestBody Author author){
-       return authorService.save(author);
-   }
-   @DeleteMapping("/delete/{id}")
-   public void deleteById(@PathVariable int id){
+    public Author save(@RequestBody Author author) {
+        return authorService.save(author);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable int id) {
         authorService.deleteById(id);
-   }
-   @PutMapping("/update")
-    public Author updateAuthor(Author author){
-      return  authorService.updateAuthor(author);
+    }
+
+    @PutMapping("/update")
+    public Author updateAuthor(Author author) {
+        return authorService.updateAuthor(author);
 
     }
+
     @GetMapping("/getAll")
-    public List<Author> getAll(){
+    public List<Author> getAll() {
         return authorService.getAllAuthorList();
     }
 }

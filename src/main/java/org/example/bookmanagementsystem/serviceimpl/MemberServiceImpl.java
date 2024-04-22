@@ -1,6 +1,7 @@
 package org.example.bookmanagementsystem.serviceimpl;
 
 import org.example.bookmanagementsystem.entity.Member;
+import org.example.bookmanagementsystem.repository.BookRepository;
 import org.example.bookmanagementsystem.repository.MemberRepository;
 import org.example.bookmanagementsystem.service.MemberService;
 
@@ -8,10 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemberServiceImpl implements MemberService {
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
-    public MemberServiceImpl(MemberRepository memberRepository) {
+
+    public MemberServiceImpl(MemberRepository memberRepository, BookRepository bookRepository) {
         this.memberRepository = memberRepository;
+
     }
 
     @Override
@@ -19,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> memberOptional = memberRepository.findById(member.getId());
         if (memberOptional.isPresent()) {
             throw new RuntimeException("Member already exists");
-        }else {
+        } else {
             return memberRepository.save(member);
         }
 
@@ -36,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
             memberToUpdate.setMobileNumber(member.getMobileNumber());
             return memberRepository.save(memberToUpdate);
 
-        }else {
+        } else {
             throw new RuntimeException("Member does not exist");
         }
 
@@ -52,4 +55,6 @@ public class MemberServiceImpl implements MemberService {
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
+
+
 }

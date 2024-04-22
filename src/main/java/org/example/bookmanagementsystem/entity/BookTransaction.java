@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import org.example.bookmanagementsystem.enums.RentStatus;
 
 import java.util.Date;
+
 @Entity
-@Table(name = "book_Tbl")
+@Table(name = "book_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,8 +22,12 @@ public class BookTransaction {
     private Date toDate;
     @Enumerated(EnumType.STRING)
     private RentStatus rentStatus;
-    private Boolean active_close;
-    @OneToOne(mappedBy = "member")
+    private Boolean active;
+    private Boolean closed;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
-
 }

@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "author_Db")
+@Table(name = "author_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,12 +20,12 @@ public class Author {
     private String name;
     private String email;
     private String mobileNumber;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
             name = "author_book",
-            joinColumns = { @JoinColumn(name = "author_id") },
-            inverseJoinColumns = { @JoinColumn(name = "book_id") }
+            joinColumns = {@JoinColumn(name = "author_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")}
     )
 
-    private Set<Book> books=new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "member_Tbl")
+@Table(name = "member_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +21,5 @@ public class Member {
     private String mobileNumber;
     private String address;
     @OneToMany(mappedBy = "member")
-    private List<Book> books;
+    private List<BookTransaction> bookTransactions;
 }
