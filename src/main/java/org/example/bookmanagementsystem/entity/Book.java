@@ -29,6 +29,8 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
     @ManyToMany(mappedBy = "book")
-    private Set<Author> authors=new HashSet<>();
-
+    private Set<Author> authors = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
