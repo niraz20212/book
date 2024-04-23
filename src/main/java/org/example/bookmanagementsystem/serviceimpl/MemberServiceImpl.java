@@ -4,10 +4,11 @@ import org.example.bookmanagementsystem.entity.Member;
 import org.example.bookmanagementsystem.repository.BookRepository;
 import org.example.bookmanagementsystem.repository.MemberRepository;
 import org.example.bookmanagementsystem.service.MemberService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 

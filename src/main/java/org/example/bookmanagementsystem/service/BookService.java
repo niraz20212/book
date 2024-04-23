@@ -15,6 +15,7 @@ public interface BookService {
 
     void rentBookForMember(Integer memberId, Integer bookId);
 
-    void returnBookForMember(Integer memberId);
+
+    void returnBookFormMember(Integer memberId, Integer bookId);
 
 }

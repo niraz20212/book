@@ -9,7 +9,7 @@ import org.example.bookmanagementsystem.enums.RentStatus;
 import java.util.Date;
 
 @Entity
-@Table(name = "book_tbl")
+@Table(name = "transaction_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +23,6 @@ public class BookTransaction {
     @Enumerated(EnumType.STRING)
     private RentStatus rentStatus;
     private Boolean active;
-    private Boolean closed;
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;

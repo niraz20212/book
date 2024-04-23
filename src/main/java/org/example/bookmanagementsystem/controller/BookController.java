@@ -38,13 +38,13 @@ public class BookController {
 
     @PostMapping("/{bookId}/rent/{memberId}")
     public ResponseEntity<?> rentBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
-        bookService.rentBookForMember(memberId, bookId);
+        bookService.rentBookForMember(bookId, memberId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{bookId}/return/{memberId}")
     public ResponseEntity<?> returnBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
-        bookService.returnBookForMember(memberId);
+        bookService.returnBookFormMember(bookId,memberId);
         return ResponseEntity.ok().build();
     }
 
