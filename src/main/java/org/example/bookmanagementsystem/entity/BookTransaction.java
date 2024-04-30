@@ -8,8 +8,9 @@ import org.example.bookmanagementsystem.enums.RentStatus;
 
 import java.util.Date;
 
+
 @Entity
-@Table(name = "transaction_tbl")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

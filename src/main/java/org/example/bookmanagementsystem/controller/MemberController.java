@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/member")
 public class MemberController {
     private MemberService memberService;
 
@@ -19,10 +19,7 @@ public class MemberController {
         return memberService.addMember(member);
 
     }
-    @PutMapping("/update")
-    public Member updateMember(@RequestBody Member member){
-        return memberService.updateMember(member);
-    }
+
     @DeleteMapping
     public void deleteMember(int id){
         memberService.deleteMember(id);

@@ -1,7 +1,9 @@
 package org.example.bookmanagementsystem.controller;
 
+import jakarta.validation.Valid;
 import org.example.bookmanagementsystem.entity.Category;
 import org.example.bookmanagementsystem.service.CategoryService;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,13 +18,11 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public Category addCategory(Category category) {
+    public Category addCategory( @Valid@RequestBody  Category category) {
+        
      return  categoryService.addCategory(category);
     }
-    @PutMapping("update")
-    public Category updateCategory(@RequestBody  Category category){
-        return categoryService.updateCategory(category);
-    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteCategory(@PathVariable int id){
         categoryService.deleteCategory(id);

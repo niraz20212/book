@@ -1,6 +1,7 @@
 package org.example.bookmanagementsystem.serviceimpl;
 
 import org.example.bookmanagementsystem.entity.Category;
+import org.example.bookmanagementsystem.exceptionhandler.CustomException;
 import org.example.bookmanagementsystem.repository.CategoryRepository;
 import org.example.bookmanagementsystem.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -18,23 +19,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category addCategory(Category category) {
+        Category categorySaved = categoryRepository.findByName(category.getName());
+        if (categorySaved != null) {
+            throw new CustomException("Category already exists");
+        }
 
         return categoryRepository.save(category);
     }
 
-    @Override
-    public Category updateCategory(Category category) {
-        Optional<Category> categoryOptional = categoryRepository.findById(category.getId());
-        if (categoryOptional.isPresent()) {
-            Category categoryToUpdate = categoryOptional.get();
-            categoryToUpdate.setName(category.getName());
-            categoryToUpdate.setDescription(category.getDescription());
-            return categoryRepository.save(categoryToUpdate);
-        } else {
-            throw new RuntimeException("Category not found");
-        }
 
-    }
 
     @Override
     public void deleteCategory(int id) {

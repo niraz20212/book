@@ -1,18 +1,31 @@
 package org.example.bookmanagementsystem.controller;
 
+
 import org.example.bookmanagementsystem.entity.Book;
+
+import org.example.bookmanagementsystem.repository.BookTransactionRepository;
 import org.example.bookmanagementsystem.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.example.bookmanagementsystem.utils.ExcelGenerator;
+import org.example.bookmanagementsystem.utils.PdfGenerator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/book")
 public class BookController {
-    @Autowired
-    private BookService bookService;
+
+    private final BookService bookService;
+    private final BookTransactionRepository bookTransactionRepository;
+
+    public BookController(BookService bookService, BookTransactionRepository bookTransactionRepository) {
+        this.bookService = bookService;
+        this.bookTransactionRepository = bookTransactionRepository;
+    }
 
 
     @PostMapping("/save")
@@ -31,21 +44,33 @@ public class BookController {
 
     }
 
-    @PutMapping("/update")
-    public void updateBook(@RequestBody Book book) {
-        bookService.updateBook(book);
-    }
 
-    @PostMapping("/{bookId}/rent/{memberId}")
+    @PostMapping("/rent/{bookId}/{memberId}")
     public ResponseEntity<?> rentBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
         bookService.rentBookForMember(bookId, memberId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{bookId}/return/{memberId}")
+    @PostMapping("/return/{bookId}/{memberId}")
     public ResponseEntity<?> returnBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
-        bookService.returnBookFormMember(bookId,memberId);
+        bookService.returnBookFormMember(bookId, memberId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/export-to-excel")
+    public ModelAndView exportIntoExcelFile() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", bookService.getListofRentedBooks());
+        modelAndView.setView(new ExcelGenerator());
+        return modelAndView;
+    }
+
+    @GetMapping("/export-to-pdf")
+    public ModelAndView exportIntoPdf() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", bookService.getListofRentedBooks());
+        modelAndView.setView(new PdfGenerator());
+        return modelAndView;
     }
 
 

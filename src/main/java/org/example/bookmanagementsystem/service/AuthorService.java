@@ -11,7 +11,5 @@ public interface AuthorService {
 
     void deleteById(int id);
 
-    Author updateAuthor(Author author);
-
     List<Author> getAllAuthorList();
 }

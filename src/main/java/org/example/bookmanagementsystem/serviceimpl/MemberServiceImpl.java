@@ -7,7 +7,7 @@ import org.example.bookmanagementsystem.service.MemberService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 @Service
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
@@ -20,29 +20,13 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member addMember(Member member) {
-        Optional<Member> memberOptional = memberRepository.findById(member.getId());
-        if (memberOptional.isPresent()) {
+        Member memberOptional = memberRepository.findByEmail(member.getEmail());
+        if (memberOptional!=null) {
             throw new RuntimeException("Member already exists");
         } else {
             return memberRepository.save(member);
         }
 
-    }
-
-    @Override
-    public Member updateMember(Member member) {
-        Optional<Member> memberOptional = memberRepository.findById(member.getId());
-        if (memberOptional.isPresent()) {
-            Member memberToUpdate = memberOptional.get();
-            memberToUpdate.setName(member.getName());
-            memberToUpdate.setEmail(member.getEmail());
-            memberToUpdate.setAddress(member.getAddress());
-            memberToUpdate.setMobileNumber(member.getMobileNumber());
-            return memberRepository.save(memberToUpdate);
-
-        } else {
-            throw new RuntimeException("Member does not exist");
-        }
 
     }
 

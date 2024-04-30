@@ -1,5 +1,6 @@
 package org.example.bookmanagementsystem.controller;
 
+import jakarta.validation.Valid;
 import org.example.bookmanagementsystem.entity.Author;
 import org.example.bookmanagementsystem.service.AuthorService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class AuthorController {
     }
 
     @PostMapping("/save")
-    public Author save(@RequestBody Author author) {
+    public Author save(@Valid @RequestBody Author author) {
         return authorService.save(author);
     }
 
@@ -25,11 +26,7 @@ public class AuthorController {
         authorService.deleteById(id);
     }
 
-    @PutMapping("/update")
-    public Author updateAuthor(Author author) {
-        return authorService.updateAuthor(author);
 
-    }
 
     @GetMapping("/getAll")
     public List<Author> getAll() {
