@@ -1,7 +1,8 @@
 package org.example.bookmanagementsystem.controller;
 
 
-import org.example.bookmanagementsystem.entity.Book;
+import org.example.bookmanagementsystem.dto.request.BookRequest;
+import org.example.bookmanagementsystem.dto.response.BookResponse;
 
 import org.example.bookmanagementsystem.repository.BookTransactionRepository;
 import org.example.bookmanagementsystem.service.BookService;
@@ -29,8 +30,9 @@ public class BookController {
 
 
     @PostMapping("/save")
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
+    public Boolean addBook(@RequestBody BookRequest bookRequest) {
+        bookService.addBook(bookRequest);
+        return true;
     }
 
     @DeleteMapping("delete/{id}")
@@ -39,28 +41,29 @@ public class BookController {
     }
 
     @GetMapping("/find-all")
-    public List<Book> getAllBooks() {
+    public List<BookResponse> getAllBooks() {
         return bookService.getAllBooks();
 
     }
 
 
-    @PostMapping("/rent/{bookId}/{memberId}")
-    public ResponseEntity<?> rentBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
-        bookService.rentBookForMember(bookId, memberId);
+    @PostMapping("/rent/{bookName}/{memberName}")
+    public ResponseEntity<?> rentBookForMember(@PathVariable String bookName, @PathVariable String memberName) {
+        bookService.rentBookForMember(bookName, memberName);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/return/{bookName}/{memberName}")
+    public ResponseEntity<?> returnBookForMember(@PathVariable String bookName, @PathVariable String memberName) {
+        bookService.returnBookForMember(bookName, memberName);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/return/{bookId}/{memberId}")
-    public ResponseEntity<?> returnBookForMember(@PathVariable int bookId, @PathVariable int memberId) {
-        bookService.returnBookFormMember(bookId, memberId);
-        return ResponseEntity.ok().build();
-    }
+
 
     @GetMapping("/export-to-excel")
     public ModelAndView exportIntoExcelFile() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("list", bookService.getListofRentedBooks());
+        modelAndView.addObject("list", bookService.getListOfRentedBooks());
         modelAndView.setView(new ExcelGenerator());
         return modelAndView;
     }
@@ -68,7 +71,7 @@ public class BookController {
     @GetMapping("/export-to-pdf")
     public ModelAndView exportIntoPdf() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("list", bookService.getListofRentedBooks());
+        modelAndView.addObject("list", bookService.getListOfRentedBooks());
         modelAndView.setView(new PdfGenerator());
         return modelAndView;
     }

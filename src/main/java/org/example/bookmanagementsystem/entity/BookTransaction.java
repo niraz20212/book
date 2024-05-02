@@ -8,12 +8,11 @@ import org.example.bookmanagementsystem.enums.RentStatus;
 
 import java.util.Date;
 
-
 @Entity
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class BookTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -4,20 +4,19 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Table(name = "member_tbl")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
             flags = Pattern.Flag.CASE_INSENSITIVE,message = "Please Provide Valid Email")
     private String email;

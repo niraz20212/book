@@ -35,7 +35,7 @@ public class PdfGenerator extends AbstractPdfView {
         document.add(title);
 
         Font tableHead = new Font(Font.TIMES_ROMAN, 12, Font.BOLD, Color.ORANGE);
-        PdfPTable table = new PdfPTable(5);// no.of columns
+        PdfPTable table = new PdfPTable(4);// no.of columns
         table.addCell(new Phrase("ID", tableHead));
         table.addCell(new Phrase("MEMBER NAME", tableHead));
         table.addCell(new Phrase("BOOK", tableHead));

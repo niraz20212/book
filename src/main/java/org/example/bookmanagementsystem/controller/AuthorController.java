@@ -1,6 +1,7 @@
 package org.example.bookmanagementsystem.controller;
 
 import jakarta.validation.Valid;
+import org.example.bookmanagementsystem.dto.request.AuthorDto;
 import org.example.bookmanagementsystem.entity.Author;
 import org.example.bookmanagementsystem.service.AuthorService;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class AuthorController {
     }
 
     @PostMapping("/save")
-    public Author save(@Valid @RequestBody Author author) {
-        return authorService.save(author);
+    public Author save(@Valid @RequestBody AuthorDto authorDto) {
+        return authorService.save(authorDto);
     }
 
     @DeleteMapping("/delete/{id}")

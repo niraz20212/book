@@ -3,7 +3,6 @@ package org.example.bookmanagementsystem.controller;
 import jakarta.validation.Valid;
 import org.example.bookmanagementsystem.entity.Category;
 import org.example.bookmanagementsystem.service.CategoryService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

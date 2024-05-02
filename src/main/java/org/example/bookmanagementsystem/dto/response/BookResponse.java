@@ -1,18 +1,19 @@
 package org.example.bookmanagementsystem.dto.response;
 
+import lombok.Builder;
 import org.example.bookmanagementsystem.entity.Category;
 
 import java.util.Date;
-
+@Builder
 public class BookResponse {
-    private int id;
+    private Integer id;
     private String name;
     private Integer noOfPages;
-    private int isbn;
+    private Integer isbn;
     private Double rating;
-    private int stockCount;
+    private Integer stockCount;
     private Date publishDate;
     private String photo;
-    private Category category;
+    private Integer categoryId;
 
 }

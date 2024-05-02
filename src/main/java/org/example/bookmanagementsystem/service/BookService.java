@@ -1,21 +1,23 @@
 package org.example.bookmanagementsystem.service;
 
-import org.example.bookmanagementsystem.entity.Book;
+import org.example.bookmanagementsystem.dto.request.BookRequest;
+import org.example.bookmanagementsystem.dto.response.BookResponse;
 import org.example.bookmanagementsystem.entity.BookTransaction;
 
 import java.util.List;
 
 public interface BookService {
-    Book addBook(Book book);
+    Boolean addBook(BookRequest bookRequest);
 
     void deleteBook(int id);
 
-    List<Book> getAllBooks();
+    List<BookResponse> getAllBooks();
 
-    void rentBookForMember(Integer memberId, Integer bookId);
+    void rentBookForMember(String bookName, String memberName);
 
 
-    void returnBookFormMember(Integer memberId, Integer bookId);
-    List<BookTransaction> getListofRentedBooks();
+    List<BookTransaction> getListOfRentedBooks();
+
+    void returnBookForMember(String bookName, String memberName);
 
 }
